@@ -445,14 +445,13 @@
             gap: 1.25rem;
         }
         
-        /* --- UPDATED ARCHIVE LOGO STYLES FOR CONSISTENCY --- */
+        /* Reverted to match original Taskion size exactly */
         .archive-logo {
             width: 50px;
             height: 50px;
             border-radius: 12px;
-            object-fit: contain; /* Ensures the whole logo fits inside without stretching */
-            padding: 6px; /* Adds space around the image inside the box */
-            background-color: #ffffff; /* Forces white background */
+            object-fit: cover;
+            background-color: #000;
             border: 1px solid var(--border);
         }
 
@@ -683,7 +682,7 @@
 
                 <div class="archive-item">
                     <div class="archive-info-container">
-                        <img src="icon-helpinghand.png" alt="HelpingHand Logo" class="archive-logo">
+                        <img src="icon-helpinghand.png" alt="HelpingHand Logo" class="archive-logo" style="background-color: #ffffff;">
                         <div class="archive-info">
                             <h4>HelpingHand</h4>
                             <p>A service-oriented business platform co-founded to connect users with property listings, cleaning services, and daily opportunities.</p>
@@ -694,7 +693,7 @@
 
                 <div class="archive-item">
                     <div class="archive-info-container">
-                        <img src="icon-trace.png" alt="Trace Logo" class="archive-logo">
+                        <img src="icon-trace.png" alt="Trace Logo" class="archive-logo" style="background-color: #ffffff;">
                         <div class="archive-info">
                             <h4>Trace</h4>
                             <p>A plagiarism checker web app utilizing text analysis and algorithms to detect similarities.</p>
