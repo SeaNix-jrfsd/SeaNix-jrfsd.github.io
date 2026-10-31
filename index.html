@@ -5,413 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seanix | Full-Stack Developer</title>
     <style>
-        /* --- CSS Variables (Original Theme) --- */
+        /* --- CSS Variables --- */
         :root {
             --bg-color: #0a0a0a;
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
-            --accent: #8b5cf6; /* QuickAid Purple */
+            --accent: #8b5cf6;
             --card-bg: #171717;
             --border: #262626;
         }
 
         /* --- Reset & Base --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-
-        a:hover {
-            color: var(--accent);
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        a { color: inherit; text-decoration: none; transition: color 0.2s ease; }
+        a:hover { color: var(--accent); }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
 
         /* --- HERO SECTION --- */
-        header {
-            padding: 8rem 0 4rem;
-        }
+        header { padding: 8rem 0 4rem; }
+        .hero-top { display: flex; flex-direction: column; align-items: flex-start; gap: 2rem; margin-bottom: 2rem; }
+        @media (min-width: 768px) { .hero-top { flex-direction: row; justify-content: space-between; align-items: center; } }
+        
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 0.5rem; }
+        .highlight { color: var(--accent); }
+        
+        .philosophy { font-size: 1.1rem; font-style: italic; color: var(--text-muted); margin-bottom: 1.5rem; border-left: 2px solid var(--accent); padding-left: 1rem; }
+        
+        .subtitle { font-size: 1.15rem; color: var(--text-muted); max-width: 600px; margin-bottom: 2rem; }
+        .subtitle strong { color: var(--text-main); font-weight: 600; }
 
-        .hero-top {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        @media (min-width: 768px) {
-            .hero-top {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-        }
-
-        h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-        }
-
-        .highlight {
-            color: var(--accent);
-        }
-
-        .subtitle {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin-bottom: 2rem;
-        }
-
-        /* --- PROFILE IMAGE (Portrait Style) --- */
-        .profile-img-container {
-            width: 220px;
-            height: 300px;
-            border-radius: 1rem;
-            padding: 4px;
-            background: linear-gradient(135deg, var(--accent), #3b82f6);
-            flex-shrink: 0;
-            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.2);
-        }
-
-        .profile-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 0.75rem;
-            object-fit: cover;
-            object-position: top center;
-            border: 4px solid var(--bg-color);
-        }
+        /* --- PROFILE IMAGE --- */
+        .profile-img-container { width: 220px; height: 300px; border-radius: 1rem; padding: 4px; background: linear-gradient(135deg, var(--accent), #3b82f6); flex-shrink: 0; box-shadow: 0 10px 40px rgba(139, 92, 246, 0.2); }
+        .profile-img { width: 100%; height: 100%; border-radius: 0.75rem; object-fit: cover; object-position: top center; border: 4px solid var(--bg-color); }
 
         /* --- BUTTONS --- */
-        .btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 500;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background-color: var(--accent);
-            color: #fff;
-            border: 1px solid var(--accent);
-        }
-
-        .btn-primary:hover {
-            background-color: #7c3aed;
-            color: #fff;
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--text-muted);
-            color: #fff;
-        }
+        .btn-group { display: flex; flex-wrap: wrap; gap: 1rem; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 500; font-size: 0.95rem; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .btn-primary { background-color: var(--accent); color: #fff; border: 1px solid var(--accent); }
+        .btn-primary:hover { background-color: #7c3aed; color: #fff; }
+        .btn-secondary { background-color: transparent; color: var(--text-main); border: 1px solid var(--border); }
+        .btn-secondary:hover { border-color: var(--text-muted); color: #fff; }
 
         /* --- SECTIONS --- */
-        section {
-            padding: 4rem 0;
-        }
+        section { padding: 4rem 0; }
+        .section-header { font-size: 1.5rem; font-weight: 600; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.75rem; }
+        .section-header svg { color: var(--accent); }
 
-        .section-header {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .section-header svg {
-            color: var(--accent);
-        }
-
-        /* --- SKILLS & EDUCATION GRID --- */
-        .info-grid {
-            display: grid;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        @media (min-width: 768px) {
-            .info-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .info-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 1rem;
-            padding: 2rem;
-        }
-
-        .info-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            color: var(--text-main);
-        }
-
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .skill-tag {
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 0.3rem 0.75rem;
-            background-color: #262626;
-            border-radius: 999px;
-            color: var(--text-muted);
-        }
-
-        .edu-item h4 {
-            font-size: 1rem;
-            color: var(--text-main);
-            margin-bottom: 0.25rem;
-        }
-
-        .edu-item p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .status-badge {
-            display: inline-block;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            background-color: rgba(34, 197, 94, 0.15);
-            color: #4ade80;
-        }
+        /* --- SKILLS & EDUCATION --- */
+        .info-grid { display: grid; gap: 2rem; margin-bottom: 2rem; }
+        @media (min-width: 768px) { .info-grid { grid-template-columns: 1fr 1fr; } }
+        .info-card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 1rem; padding: 2rem; }
+        .info-card h3 { font-size: 1.1rem; margin-bottom: 1rem; color: var(--text-main); }
+        .skills-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .skill-tag { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; padding: 0.3rem 0.75rem; background-color: #262626; border-radius: 999px; color: var(--text-muted); }
+        .edu-item h4 { font-size: 1rem; color: var(--text-main); margin-bottom: 0.25rem; }
+        .edu-item p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .status-badge { display: inline-block; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 4px; background-color: rgba(34, 197, 94, 0.15); color: #4ade80; }
 
         /* --- FEATURED PROJECTS --- */
-        .project-grid {
-            display: grid;
-            gap: 2.5rem;
-        }
+        .project-grid { display: grid; gap: 2.5rem; }
+        .project-card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 1rem; overflow: hidden; display: grid; transition: transform 0.2s, border-color 0.2s; }
+        .project-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+        @media (min-width: 768px) { .project-card { grid-template-columns: 1fr 1fr; } }
+        
+        .project-content { padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; }
+        
+        /* Title with Side Icon */
+        .project-title-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+        .project-side-icon { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; }
+        .project-content h3 { font-size: 1.5rem; margin: 0; }
+        
+        .project-content p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .tech-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .tech-tag { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; padding: 0.25rem 0.75rem; background-color: #262626; border-radius: 999px; }
+        .project-link { font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-main); }
+        .project-link:hover { color: var(--accent); }
 
-        .project-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 1rem;
-            overflow: hidden;
-            display: grid;
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-
-        .project-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-
-        @media (min-width: 768px) {
-            .project-card {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .project-content {
-            padding: 2.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .project-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-content p {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-        }
-
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-tag {
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 0.25rem 0.75rem;
-            background-color: #262626;
-            border-radius: 999px;
-        }
-
-        .project-link {
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-main);
-        }
-
-        .project-link:hover {
-            color: var(--accent);
-        }
-
-        .project-image {
-            background-color: #000;
-            background-size: cover;
-            background-position: top center;
-            min-height: 250px;
-            border-left: 1px solid var(--border);
-        }
-
-        @media (max-width: 767px) {
-            .project-image {
-                order: -1;
-                border-left: none;
-                border-bottom: 1px solid var(--border);
-            }
-        }
+        /* Image Box with White Background */
+        .project-image { background-color: #ffffff; background-size: 130%; background-repeat: no-repeat; background-position: center; min-height: 250px; border-left: 1px solid var(--border); }
+        @media (max-width: 767px) { .project-image { order: -1; border-left: none; border-bottom: 1px solid var(--border); } }
 
         /* --- ARCHIVE --- */
-        .archive-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .archive-item {
-            display: flex;
-            flex-direction: column;
-            padding: 1.5rem;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 0.75rem;
-            transition: border-color 0.2s ease, transform 0.2s ease;
-        }
-
-        .archive-item:hover {
-            border-color: var(--text-muted);
-            transform: translateX(4px);
-        }
-
-        @media (min-width: 768px) {
-            .archive-item {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-        }
-
-        .archive-info h4 {
-            font-size: 1.15rem;
-            margin-bottom: 0.25rem;
-            color: var(--text-main);
-        }
-
-        .archive-info p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .archive-status {
-            margin-top: 1rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 0.25rem 0.75rem;
-            border-radius: 999px;
-            white-space: nowrap;
-        }
-
-        @media (min-width: 768px) {
-            .archive-status {
-                margin-top: 0;
-            }
-        }
-
+        .archive-list { display: flex; flex-direction: column; gap: 1rem; }
+        .archive-item { display: flex; flex-direction: column; padding: 1.5rem; background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 0.75rem; transition: border-color 0.2s, transform 0.2s; }
+        .archive-item:hover { border-color: var(--text-muted); transform: translateX(4px); }
+        @media (min-width: 768px) { .archive-item { flex-direction: row; justify-content: space-between; align-items: center; } }
+        
+        .archive-info-container { display: flex; align-items: center; gap: 1.25rem; }
+        .archive-logo { width: 50px; height: 50px; border-radius: 12px; object-fit: cover; background-color: #000; border: 1px solid var(--border); }
+        
+        .archive-info h4 { font-size: 1.15rem; margin-bottom: 0.25rem; color: var(--text-main); }
+        .archive-info p { color: var(--text-muted); font-size: 0.9rem; }
+        .archive-status { margin-top: 1rem; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; padding: 0.25rem 0.75rem; border-radius: 999px; white-space: nowrap; }
+        @media (min-width: 768px) { .archive-status { margin-top: 0; } }
+        
         .status-active { background-color: rgba(34, 197, 94, 0.2); color: #4ade80; }
         .status-rnd { background-color: rgba(139, 92, 246, 0.2); color: #a78bfa; }
         .status-complete { background-color: rgba(59, 130, 246, 0.2); color: #60a5fa; }
 
         /* --- FOOTER --- */
-        footer {
-            padding: 4rem 0 3rem;
-            border-top: 1px solid var(--border);
-            text-align: center;
-            margin-top: 2rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-links a {
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-        
-        .footer-links a:hover {
-            color: var(--accent);
-        }
-
-        .copyright {
-            color: var(--text-muted);
-            font-size: 0.875rem;
-        }
+        footer { padding: 4rem 0 3rem; border-top: 1px solid var(--border); text-align: center; margin-top: 2rem; }
+        .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; }
+        .footer-links a { color: var(--text-muted); font-weight: 500; }
+        .footer-links a:hover { color: var(--accent); }
+        .copyright { color: var(--text-muted); font-size: 0.875rem; }
     </style>
 </head>
 <body>
@@ -423,6 +121,10 @@
             <div class="hero-top">
                 <div>
                     <h1>Hi, I'm Seanix.<br>I build <span class="highlight">digital systems</span> that scale.</h1>
+                    <div class="philosophy">
+                        "We build things that last." <br>
+                        "Simple things change the world."
+                    </div>
                 </div>
                 <!-- Profile Image -->
                 <div class="profile-img-container">
@@ -430,7 +132,10 @@
                 </div>
             </div>
             
-            <p class="subtitle">Full-Stack Web Developer specializing in Laravel and modern JavaScript. I bridge the gap between complex backend architecture and premium, user-centric design.</p>
+            <p class="subtitle">
+                <strong>Full-Stack Web Developer, Graphic Designer & Visual Artist.</strong> 
+                With a background in Biochemistry and a deep history in photo/video editing, I bring a unique, versatile approach to tech. I bridge the gap between complex backend architecture and premium, user-centric design.
+            </p>
             
             <div class="btn-group">
                 <a href="https://linkedin.com/in/YOUR-LINKEDIN-URL" target="_blank" class="btn btn-primary">Connect on LinkedIn</a>
@@ -447,7 +152,6 @@
             </h2>
 
             <div class="info-grid">
-                <!-- Skills -->
                 <div class="info-card">
                     <h3>Technical Skills</h3>
                     <div class="skills-list">
@@ -459,11 +163,12 @@
                         <span class="skill-tag">PWA</span>
                         <span class="skill-tag">Push Notifications</span>
                         <span class="skill-tag">UI/UX Design</span>
+                        <span class="skill-tag">Graphic Design</span>
+                        <span class="skill-tag">Photo & Video Editing</span>
                         <span class="skill-tag">Git / GitHub</span>
                     </div>
                 </div>
                 
-                <!-- Education -->
                 <div class="info-card">
                     <h3>Education</h3>
                     <div class="edu-item">
@@ -487,10 +192,14 @@
             </h2>
 
             <div class="project-grid">
-                <!-- PROJECT 1: WEBSEA -->
-               <article class="project-card">
+                
+                <!-- WEBSEA -->
+                <article class="project-card">
                     <div class="project-content">
-                        <h3>WEBSEA</h3>
+                        <div class="project-title-row">
+                            <img src="logo-transparent.png" alt="WEBSEA Icon" class="project-side-icon">
+                            <h3>WEBSEA</h3>
+                        </div>
                         <p>A Progressive Web App designed to deliver thoughtful content and inspiration. Features a Laravel backend, custom admin dashboard, and real-time iOS push notifications.</p>
                         <div class="tech-stack">
                             <span class="tech-tag">Laravel</span>
@@ -499,38 +208,47 @@
                         </div>
                         <a href="#" class="project-link">View Project &rarr;</a>
                     </div>
-<div class="project-image" style="background-color: white !important; background-image: url('logo-transparent.png'); background-size: 70% auto; background-repeat: no-repeat; background-position: center; height: 250px; border-radius: 20px; margin: 20px;"></div>
+                    <div class="project-image" style="background-image: url('IMG_9618.jpeg');"></div>
                 </article>
 
-                <!-- PROJECT 2: QUICKAID -->
-<article class="project-card">
-    <div class="project-content">
-        <h3>QuickAid</h3>
-        <p>Co-founded and engineered a live service-matching platform. Built to connect users with verified local professionals through a seamless mobile-first experience.</p>
-        <div class="tech-stack">
-            <span class="tech-tag">UI/UX</span>
-            <span class="tech-tag">Web Architecture</span>
-            <span class="tech-tag">JavaScript</span>
-        </div>
-        <a href="https://quickaidng.com" target="_blank" class="project-link">Visit Live Site &rarr;</a>
-    </div>
-   <div class="project-image" style="background-image: url('IMG_0043-removebg-preview.png'); background-size: 130%; background-repeat: no-repeat; background-position: center; background-color: #ffffff; border-left: 1px solid var(--border);"></div>
-</article>
+                <!-- QUICKAID -->
+                <article class="project-card">
+                    <div class="project-content">
+                        <div class="project-title-row">
+                            <img src="IMG_0043.JPG" alt="QuickAid Icon" class="project-side-icon">
+                            <h3>QuickAid</h3>
+                        </div>
+                        <p>Co-founded and engineered a live service-matching platform. Built to connect users with verified local professionals through a seamless mobile-first experience.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">UI/UX</span>
+                            <span class="tech-tag">Web Architecture</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <a href="https://quickaidng.com" target="_blank" class="project-link">Visit Live Site &rarr;</a>
+                    </div>
+                    <div class="project-image" style="background-image: url('IMG_0043.JPG');"></div>
+                </article>
 
-                <!-- PROJECT 3: BEATCORE -->
-              <article class="project-card">
-    <div class="project-content">
-        <h3>BeatCore</h3>
-        <p>A full-stack e-commerce marketplace for music producers. Features multi-role access, secure checkout with Flutterwave, and a comprehensive admin control panel.</p>
-        <div class="tech-stack">
-            <span class="tech-tag">Laravel</span>
-            <span class="tech-tag">E-Commerce</span>
-            <span class="tech-tag">API</span>
-        </div>
-        <a href="#" class="project-link">View Details &rarr;</a>
-    </div>
-    <div class="project-image" style="background-image: url('no_bg_beatcore-removebg-preview.png'); background-size: 130%; background-repeat: no-repeat; background-position: center; background-color: #ffffff; border-left: 1px solid var(--border);"></div>
-</article>
+                <!-- BEATCORE -->
+                <article class="project-card">
+                    <div class="project-content">
+                        <div class="project-title-row">
+                            <img src="beatcore.png" alt="BeatCore Icon" class="project-side-icon">
+                            <h3>BeatCore</h3>
+                        </div>
+                        <p>A full-stack e-commerce marketplace for music producers. Features multi-role access, secure checkout with Flutterwave, and a comprehensive admin control panel.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">E-Commerce</span>
+                            <span class="tech-tag">API</span>
+                        </div>
+                        <a href="#" class="project-link">View Details &rarr;</a>
+                    </div>
+                    <div class="project-image" style="background-image: url('beatcore.png');"></div>
+                </article>
+
+            </div>
+        </section>
 
         <!-- ARCHIVE / R&D PROJECTS SECTION -->
         <section>
@@ -542,41 +260,97 @@
             <div class="archive-list">
                 
                 <div class="archive-item">
-                    <div class="archive-info">
-                        <h4>Taskion (AI Manager)</h4>
-                        <p>An AI-powered personal manager designed to handle tasks, goals, and scheduling through intelligent automation.</p>
+                    <div class="archive-info-container">
+                        <img src="icon-taskion.JPG" alt="Taskion Logo" class="archive-logo">
+                        <div class="archive-info">
+                            <h4>Taskion (AI Manager)</h4>
+                            <p>An AI-powered personal manager designed to handle tasks, goals, and scheduling through intelligent automation.</p>
+                        </div>
                     </div>
                     <div class="archive-status status-rnd">In Development</div>
                 </div>
 
                 <div class="archive-item">
-                    <div class="archive-info">
-                        <h4>HelpingHand</h4>
-                        <p>A service-oriented business platform co-founded to connect users with property listings, cleaning services, and daily opportunities.</p>
+                    <div class="archive-info-container">
+                        <img src="icon-helpinghand.png" alt="HelpingHand Logo" class="archive-logo">
+                        <div class="archive-info">
+                            <h4>HelpingHand</h4>
+                            <p>A service-oriented business platform co-founded to connect users with property listings, cleaning services, and daily opportunities.</p>
+                        </div>
                     </div>
                     <div class="archive-status status-rnd">Active Development</div>
                 </div>
 
                 <div class="archive-item">
-                    <div class="archive-info">
-                        <h4>UrhoboVault</h4>
-                        <p>A cultural knowledge platform dedicated to preserving and organizing Urhobo history and interviews with elders.</p>
+                    <div class="archive-info-container">
+                        <img src="icon-trace.png" alt="Trace Logo" class="archive-logo">
+                        <div class="archive-info">
+                            <h4>Trace</h4>
+                            <p>A plagiarism checker web app utilizing text analysis and algorithms to detect similarities.</p>
+                        </div>
                     </div>
-                    <div class="archive-status status-complete">Completed</div>
+                    <div class="archive-status status-rnd">In Development</div>
                 </div>
 
                 <div class="archive-item">
-                    <div class="archive-info">
-                        <h4>SeaWeb</h4>
-                        <p>A social communication platform concept combining private messaging, stories, and an official broadcast channel.</p>
+                    <div class="archive-info-container">
+                        <img src="icon-ship.JPG" alt="Ship Logo" class="archive-logo">
+                        <div class="archive-info">
+                            <h4>Ship</h4>
+                            <p>A logistics and delivery company platform for tracking shipments and routing.</p>
+                        </div>
+                    </div>
+                    <div class="archive-status status-rnd">In Development</div>
+                </div>
+
+                <div class="archive-item">
+                    <div class="archive-info-container">
+                        <img src="icon-bridge.JPG" alt="Bridge Logo" class="archive-logo">
+                        <div class="archive-info">
+                            <h4>Bridge</h4>
+                            <p>A forex broker and market analysis platform for tracking financial data.</p>
+                        </div>
                     </div>
                     <div class="archive-status status-rnd">Concept</div>
                 </div>
 
                 <div class="archive-item">
-                    <div class="archive-info">
-                        <h4>Linkage (Client Project)</h4>
-                        <p>A custom logistics and tracking platform built for commercial clients.</p>
+                    <div class="archive-info-container">
+                        <img src="icon-bonds.JPG" alt="Bonds Logo" class="archive-logo">
+                        <div class="archive-info">
+                            <h4>Bonds</h4>
+                            <p>A comprehensive alarm website featuring customizable clocks and timers.</p>
+                        </div>
+                    </div>
+                    <div class="archive-status status-rnd">Concept</div>
+                </div>
+
+                <div class="archive-item">
+                    <div class="archive-info-container">
+                        <div class="archive-info">
+                            <h4>UrhoboVault</h4>
+                            <p>A cultural knowledge platform dedicated to preserving and organizing Urhobo history and interviews with elders.</p>
+                        </div>
+                    </div>
+                    <div class="archive-status status-complete">Completed</div>
+                </div>
+
+                <div class="archive-item">
+                    <div class="archive-info-container">
+                        <div class="archive-info">
+                            <h4>SeaWeb</h4>
+                            <p>A social communication platform concept combining private messaging, stories, and an official broadcast channel.</p>
+                        </div>
+                    </div>
+                    <div class="archive-status status-rnd">Concept</div>
+                </div>
+
+                <div class="archive-item">
+                    <div class="archive-info-container">
+                        <div class="archive-info">
+                            <h4>Linkage (Client Project)</h4>
+                            <p>A custom logistics and tracking platform built for commercial clients.</p>
+                        </div>
                     </div>
                     <div class="archive-status status-complete">Client Handoff</div>
                 </div>
